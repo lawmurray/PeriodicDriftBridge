@@ -1,3 +1,10 @@
 #!/bin/sh
 
-bi sample @config.conf --target joint --model-file PeriodicDrift.bi --output-file data/obs.nc
+# generate data sets
+libbi sample @config.conf @joint.conf
+
+# fit Gaussian processes for bridge sampling
+octave --path oct -q --eval "prepare_input;"
+
+# preset data set
+octave --path oct -q --eval "prepare_obs;"
