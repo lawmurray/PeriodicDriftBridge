@@ -2,9 +2,11 @@
  * Periodic drift model.
  */
 model PeriodicDrift {
+  const pi = 3.141592653589793;
+  const h = 0.075;
+
   noise dW;
   state x;
-  const pi = 3.141592653589793;
   param theta;
 
   sub parameter {
@@ -15,11 +17,10 @@ model PeriodicDrift {
     x <- 0;
   }
 
-  sub transition {
+  sub transition(delta = h) {
     dW ~ wiener();
-    ode {
-      dx/dt = sin(x - theta) + dW;
+    ode(h = h, alg = 'RK4') {
+      dx/dt = sin(x - theta) + dW/h;
     }
-  }
-  
+  }  
 }

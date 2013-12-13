@@ -1,13 +1,17 @@
-LibBi package: Brownian
-=========================
+LibBi package: PeriodicDrift
+============================
 
 Synopsis
 --------
 
     ./run.sh
     
+
 Description
 -----------
+
+This package implements the periodic drift diffusion process introduced in
+Beskos et al. (2006) and further studied in Len, Chen & Mykland (2010).
 
 
 References
