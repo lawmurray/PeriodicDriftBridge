@@ -1,6 +1,8 @@
 function prepare_input
+    pkg load optim;
+    
     % read prior sample
-    nc = netcdf('results/prior.nc', 'r');
+    nc = netcdf('results/prepare_input.nc', 'r');
     X = nc{'x'}(:,:);
     T = repmat(nc{'time'}(:)', columns(X), 1)';
     ncclose(nc);

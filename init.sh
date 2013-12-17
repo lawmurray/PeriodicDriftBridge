@@ -2,9 +2,8 @@
 
 # generate data sets
 libbi sample @config.conf @joint.conf
+octave --path oct -q --eval "prepare_obs;" # preset data set
 
-# fit Gaussian processes for bridge sampling
+# fit bridge weight function
+libbi sample @config.conf @prepare_input.conf
 octave --path oct -q --eval "prepare_input;"
-
-# preset data set
-octave --path oct -q --eval "prepare_obs;"

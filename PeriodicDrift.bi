@@ -4,16 +4,12 @@
 model PeriodicDrift {
   const pi = 3.141592653589793;
   const h = 0.075;
+  inline theta = pi;
 
-  param theta;
   noise dW;
   state x, v;
   obs y;
-  input ell2, sf2, epsilon; // bridge weight parameters
-
-  sub parameter {
-    theta ~ uniform(0.0, 2*pi);
-  }
+  input sigma2, epsilon; // bridge weight parameters
 
   sub initial {
     x <- 0;
@@ -29,13 +25,14 @@ model PeriodicDrift {
   }
 
   sub bridge {
-    inline k = sf2*exp(-0.5*(t_next_obs - t_now)**2/ell2);
-    inline sigma2 = sf2 - k*k/sf2 + epsilon**2;
-    y ~ gaussian(x, sqrt(sigma2));
+    inline z = round(x/pi)*pi;
+    inline delta = t_next_obs - t_now;
+    inline Z = sqrt(2.0*pi*sigma2*delta)*(exp(-0.5*sigma2*delta) + 1 + epsilon);
+    y ~ (cos(y - z) + 1.0 + epsilon)*exp(-0.5*(y - z)**2.0/(delta*sigma2))/Z;
   }
 
   sub observation {
-    y ~ gaussian(x, epsilon);
+    //y ~ gaussian(x, 1.0e-2);
     x <- y;
   }
 }
