@@ -10,11 +10,12 @@ model PeriodicDrift {
   const pi = 3.141592653589793;
   const h = 0.075;
   const theta = pi;
+  const epsilon = 1.0e-6;
 
   noise w;
   state mu, x, v;
   obs y;
-  input sigma2, epsilon; // bridge weight parameters
+  input sigma2; // bridge weight
 
   sub initial {
     mu <- 0;

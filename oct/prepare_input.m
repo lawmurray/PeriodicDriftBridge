@@ -7,7 +7,7 @@ function prepare_input
     T = repmat(nc{'time'}(:)', columns(X), 1)';
     ncclose(nc);
     
-    theta = [ log(1.0); log(1.0e-3) ];
+    theta = log(1.0);
     x = X(:);
     t = T(:);
     is = find(t > 0);
@@ -20,8 +20,6 @@ function prepare_input
     % write bridge weighting parameters
     nc = netcdf('data/input.nc', 'c');
     nc{'sigma2'} = ncdouble();
-    nc{'epsilon'} = ncdouble();
     nc{'sigma2'}(:) = exp(theta0(1));
-    nc{'epsilon'}(:) = exp(theta0(2));
     ncclose(nc);
 end
