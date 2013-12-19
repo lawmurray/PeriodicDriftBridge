@@ -25,8 +25,8 @@ model PeriodicDrift {
   sub transition(delta = h) {
     mu <- x + sin(x - theta)*h;
     w ~ gaussian(0.0, sqrt(h));
-    x <- (t_next_obs > 0.0 && t_now + 1.01*h >= t_next_obs) ? y : mu + w;
-    v <- x/pi;
+    x <- (t_now < t_next_obs && t_next_obs <= t_now + 1.01*h) ? y : mu + w;
+    v <- x/pi; // for neater plots
   }
 
   sub bridge {
