@@ -3,6 +3,8 @@ function plot_weight
     
   subplot(1,2,1);
   bi_image_density('results/prepare_input.nc', 'v', [], [], [], Y_RES);
+  xlabel('t');
+  ylabel('x/\pi');
   
   ax = axis();
   cax = caxis();
@@ -25,4 +27,5 @@ function plot_weight
   imagesc(t, x/pi, pp);
   set(gca(), 'ydir', 'normal');
   caxis(cax);
+  xlabel('t');
 end
