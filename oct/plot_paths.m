@@ -1,20 +1,19 @@
 function plot_paths()
     ax = [0 90 -4 2];
+    range = [32:32:1024];
+    filters = {'Bootstrap'; 'Bridge'};
     
-    subplot(1,2,1);
-    bi_plot_paths('results/posterior_bootstrap.nc', 'v', [], [32:32:1024]);
-    hold on;
-    bi_plot_paths('data/obs_set.nc', 'v');
-    hold off;
-    axis(ax);
-    xlabel('t');
-    ylabel('x/\pi');
-    
-    subplot(1,2,2);
-    bi_plot_paths('results/posterior_bridge.nc', 'v', [], [32:32:1024]);
-    hold on;
-    bi_plot_paths('data/obs_set.nc', 'v');
-    hold off;
-    axis(ax);
-    xlabel('t');
+    for i = 1:length(filters);
+        subplot(1, length(filters), i);
+        bi_plot_paths(sprintf('results/posterior_%s.nc', tolower(filters{i})), 'v', [], range);
+        hold on;
+        bi_plot_paths('data/obs_set.nc', 'v');
+        hold off;
+        axis(ax);
+        xlabel('t');
+        if i == 1
+            ylabel('x/\pi');
+        end
+        title(filters{i});
+    end
 end

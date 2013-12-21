@@ -8,13 +8,13 @@ function prepare_obs
     ncclose(nc);
     
     % creates obs as in Lin, Chen and Mykland (2010), Figure 4
-    t = [0 30 60 90]';
-    y = [0 1.49 -5.91 -1.17]';
+    t = [30 60 90]';
+    y = [1.49 -5.91 -1.17]';
     x = y;
     v = x/pi;
         
     nc = netcdf('data/obs_set.nc', 'c');
-    nc('nr') = 4;
+    nc('nr') = length(t);
     nc{'time'} = ncdouble('nr');
     nc{'y'} = ncdouble('nr');
     nc{'x'} = ncdouble('nr');
