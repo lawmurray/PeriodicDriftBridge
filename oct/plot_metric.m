@@ -4,15 +4,14 @@ function plot_metric(k)
     end
     
     filters = {'Bootstrap'; 'Bridge'};
-    Ps = 2.**[3:8]';
+    logPs = [3:9]';
+    Ps = 2.**logPs;
 
-    y = [];
-    ly = [];
-    uy = [];
+    y = zeros(length(Ps), length(filters));
+    ly = zeros(size(y));
+    uy = zeros(size(y));
     
     for i = 1:length(filters)
-        metric = [];
-        t = [];
         for j = 1:length(Ps)
             P = Ps(j);
             file = sprintf('%s%d.csv', tolower(filters{i}), P);
@@ -20,19 +19,19 @@ function plot_metric(k)
             % ^ dlmread doesn't handle the headers with spaces
             X = textread(file, '%f', inf, 'headerlines', 1);
             X = reshape(X, 6, length(X)/6)';
-            X = X(2:end,:);
-            % ^ ignore first row, as headers, and second, as time is outlier
-            metric = [ metric X(:,k) ];
-            t = [ t X(:,6) ];
-        end            
-
-        y = [ y quantile(metric, 0.5)' ];
-        ly = [ ly quantile(metric, 0.25)' ];
-        uy = [ uy quantile(metric, 0.75)' ];
+            
+            if k == 5 || k == 6
+                X = X/1e6; % convert to seconds
+            end
+            
+            y(j,i) = quantile(X(:,k), 0.5);
+            ly(j,i) = quantile(X(:,k), 0.25);
+            uy(j,i) = quantile(X(:,k), 0.75);
+        end
     end
 
     % plot bars
-    h = bar (y);
+    h = bar (logPs, y);
     for i = 1:length(h)
         set (h(i), 'facecolor', fade(watercolour(i), 0.5));
         set (h(i), 'edgecolor', watercolour(i));
@@ -44,9 +43,9 @@ function plot_metric(k)
     for i = 1:columns(y)
         for j = 1:rows(y)
             if i == 1
-                x = j - 0.2;
+                x = logPs(j) - 0.2;
             else
-                x = j + 0.2;
+                x = logPs(j) + 0.2;
             end
             line ([x x], [ly(j,i), uy(j,i)], 'color', watercolour(i), ...
                 'linewidth', 2);
@@ -59,5 +58,8 @@ function plot_metric(k)
     
     grid on;
     legend(filters, 'location', 'northwest');
+    xlabel('log_2 N');
+    ax = axis();
+    axis([logPs(1) - 0.5, logPs(end) + 0.5, ax(3), ax(4)]);
     hold off;
 end
