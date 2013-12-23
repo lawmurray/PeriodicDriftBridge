@@ -34,7 +34,7 @@ model PeriodicDrift {
     inline delta = t_next_obs - t_now;
     inline Z = sqrt(2.0*pi*sigma2*delta)*(exp(-0.5*sigma2*delta) + 1.0 + epsilon);
 
-    y ~ (cos(y - z) + 1.0 + epsilon)*exp(-0.5*(y - z)**2.0/(delta*sigma2))/Z;
+    y ~ pdf(log(cos(y - z) + 1.0 + epsilon) - 0.5*(y - z)**2.0/(delta*sigma2) - log(Z), log = 1);
   }
 
   sub observation {
