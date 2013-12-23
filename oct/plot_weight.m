@@ -13,7 +13,7 @@ function plot_weight
   x = linspace(ax(3), ax(4), Y_RES)*pi;
   
   nc = netcdf('data/input.nc', 'r');
-  theta = log(nc{'sigma2'}(:));
+  theta = [log(nc{'sigma2'}(:)) log(nc{'epsilon'}(:))]';
   ncclose(nc);
   
   [tt, xx] = meshgrid(t, x);

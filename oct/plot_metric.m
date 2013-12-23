@@ -4,6 +4,7 @@ function plot_metric(k)
     end
     
     filters = {'Bootstrap'; 'Bridge'};
+    ess = {'0.5'; '0.5'};
     logPs = [3:9]';
     Ps = 2.**logPs;
 
@@ -14,11 +15,11 @@ function plot_metric(k)
     for i = 1:length(filters)
         for j = 1:length(Ps)
             P = Ps(j);
-            file = sprintf('%s%d.csv', tolower(filters{i}), P);
+            file = sprintf('%s-%d-%s.csv', tolower(filters{i}), P, ess{i});
             %X = dlmread(file);
             % ^ dlmread doesn't handle the headers with spaces
             X = textread(file, '%f', inf, 'headerlines', 1);
-            X = reshape(X, 6, length(X)/6)';
+            X = reshape(X, 7, length(X)/7)';
             
             if k == 5 || k == 6
                 X = X/1e6; % convert to seconds

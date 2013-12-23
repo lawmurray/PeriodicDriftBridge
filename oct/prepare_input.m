@@ -7,7 +7,7 @@ function prepare_input
     T = repmat(nc{'time'}(:)', columns(X), 1)';
     ncclose(nc);
     
-    theta = log(1.0);
+    theta = [log(1.0) log(0.1)]';
     x = X(:);
     t = T(:);
     is = find(t > 0);
@@ -21,5 +21,7 @@ function prepare_input
     nc = netcdf('data/input.nc', 'c');
     nc{'sigma2'} = ncdouble();
     nc{'sigma2'}(:) = exp(theta0(1));
+    nc{'epsilon'} = ncdouble();
+    nc{'epsilon'}(:) = exp(theta0(2));
     ncclose(nc);
 end
