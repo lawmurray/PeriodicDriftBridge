@@ -5,7 +5,17 @@ function plot_metric(k)
     
     filters = {'Bootstrap'; 'Bridge'};
     ess = {'0.5'; '0.5'};
-    logPs = [3:9]';
+    ylabels = {
+        'ESS/N';
+        'CAR';
+        'Mean -log p(x_n|x_0)';
+        'Std. dev. -log p(x_n|x_0)'
+        'Mean execution time (s)';
+        'Std. dev. execution time (s)';
+        'Number of samples';
+        };
+        
+    logPs = [5:10]';
     Ps = 2.**logPs;
 
     y = zeros(length(Ps), length(filters));
@@ -21,6 +31,9 @@ function plot_metric(k)
             X = textread(file, '%f', inf, 'headerlines', 1);
             X = reshape(X, 7, length(X)/7)';
             
+            if k == 3
+                X = -X; % convert log-likelihood to -ve log-likelihood
+            end
             if k == 5 || k == 6
                 X = X/1e6; % convert to seconds
             end
@@ -59,6 +72,7 @@ function plot_metric(k)
     
     grid on;
     legend(filters, 'location', 'northwest');
+    ylabel(ylabels{k});
     xlabel('log_2 N');
     ax = axis();
     axis([logPs(1) - 0.5, logPs(end) + 0.5, ax(3), ax(4)]);

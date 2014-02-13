@@ -1,12 +1,14 @@
 function plot_weight
   Y_RES = 400;
-    
+
+  ax = [0 30 -3 3];
+
   subplot(1,2,1);
   bi_image_density('results/prepare_input.nc', 'v', [], [], [], Y_RES);
   xlabel('t');
   ylabel('x/\pi');
   
-  ax = axis();
+  axis(ax);
   cax = caxis();
   
   t = linspace(0, ax(2), 401);
@@ -24,6 +26,8 @@ function plot_weight
   subplot(1,2,2);
   imagesc(t, x/pi, pp);
   set(gca(), 'ydir', 'normal');
+  axis(ax);
   caxis(cax);
   xlabel('t');
+  ylabel('x/\pi');
 end
