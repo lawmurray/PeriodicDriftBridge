@@ -10,7 +10,7 @@ function plot_ess(rep)
         nc = netcdf(file, 'r');
         P = nc{'P'}(:);
         L = nc{'loglikelihood'}(:,:)';
-        metric = ess(L)'./P;
+        metric = ess(L)'/rows(L);
         y = [ y metric ];
         ncclose(nc);
     end
