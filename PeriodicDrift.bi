@@ -30,11 +30,12 @@ model PeriodicDrift {
   }
 
   sub bridge {
-    inline z = round(x/(2.0*pi))*2.0*pi; // centre at nearest multiple of pi
+    const lambda = 0.25; // tempering
+    inline z = round(x/(2.0*pi))*2.0*pi; // centre at nearest multiple of 2*pi
     inline delta = t_next_obs - t_now;
     inline Z = sqrt(2.0*pi*sigma2*delta)*(exp(-0.5*sigma2*delta) + 1.0 + epsilon);
 
-    y ~ pdf(log(cos(y - z) + 1.0 + epsilon) - 0.5*(y - z)**2.0/(delta*sigma2) - log(Z), log = 1);
+    y ~ pdf(lambda*(log(cos(y - z) + 1.0 + epsilon) - 0.5*(y - z)**2.0/(delta*sigma2) - log(Z)), log = 1);
   }
 
   sub observation {
