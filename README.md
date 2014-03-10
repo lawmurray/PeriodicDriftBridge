@@ -1,5 +1,5 @@
-LibBi package: PeriodicDrift
-============================
+LibBi package: PeriodicDriftBridge
+==================================
 
 Synopsis
 --------

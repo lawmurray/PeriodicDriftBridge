@@ -6,7 +6,7 @@
  * of x(n) at each time, without the noise term w(n) having yet been
  * added. This is then used in the observation block to weight appropriately.
  */
-model PeriodicDrift {
+model PeriodicDriftBridge {
   const pi = 3.141592653589793;
   const h = 0.075;
   const theta = pi;
