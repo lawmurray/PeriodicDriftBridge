@@ -35,9 +35,12 @@ function plot_metric(metric)
     end
 
     for i=1:rows(y{1})
-        %h = loglog(y(i,1), y(i,2), '.', 'color', ...
-        %    fade(rainbow(16)(rep + 1,:), 0.5), 'markersize', 4*sqrt(P(i)/pi));
-        h = loglog(y{1}(i), y{2}(i), 'o', 'color', watercolour(1), 'markersize', ...
+        if y{1}(i) > y{2}(i)
+            col = watercolour(1);
+        else
+            col = watercolour(2);
+        end
+        h = loglog(y{1}(i), y{2}(i), 'o', 'color', col, 'markersize', ...
                    sqrt(P{1}(i)/pi), 'linewidth', 3);
         hold on;
     end
