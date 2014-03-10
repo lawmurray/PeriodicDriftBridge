@@ -23,7 +23,7 @@ function plot_metric(metric)
             elseif metric == 3
                 tmp = mean(L)';
             elseif metric == 4
-                tmp = std(L)'./mean(T)';
+                tmp = -std(L)'./mean(T)';
             end
             y{i} = [ y{i}; tmp ];
             P{i} = [ P{i}; nc{'P'}(:) ];
@@ -42,7 +42,7 @@ function plot_metric(metric)
         hold on;
     end
 
-    axis('tight');
+    %axis('tight');
     ax = axis();
     mn = min([ax(1), ax(3)]);
     mx = max([ax(2), ax(4)]);

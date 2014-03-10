@@ -17,7 +17,7 @@ function plot_and_print ()
 
     subplot(1,3,1);
     plot_metric(4);
-    title('\sigma/t');
+    title('-\sigma/t');
     xlabel('Bootstrap');
     ylabel('Bridge');
     subplot(1,3,2);
