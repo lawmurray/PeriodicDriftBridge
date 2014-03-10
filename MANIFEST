@@ -5,6 +5,14 @@ README.md
 VERSION.md
 init.sh
 run.sh
-PeriodicDrift.bi
+PeriodicDriftBridge.bi
 config.conf
+posterior.conf
+prepare_input.conf
+prepare_obs.conf
+prior.conf
+test_filter.conf
+data/input.nc
+data/obs.nc
+data/obs_set.nc
 data
