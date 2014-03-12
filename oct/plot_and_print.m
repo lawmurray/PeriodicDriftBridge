@@ -38,11 +38,9 @@ function plot_and_print ()
     saveas(figure(1), file);
     system(sprintf('pdfcrop %s %s', file, file));
 
-    %clf;
-    %set (figure(1), 'papersize', [3.5 8]);
-    %set (figure(1), 'paperposition', [0 0 3.5 8]);
-    %orient ('landscape');
-    %plot_paths;
-    %saveas (figure(1), sprintf('%s/paths.svg', figDir));
-    %saveas (figure(1), sprintf('%s/paths.pdf', figDir));
+    clf;
+    plot_filter;
+    file = sprintf('%s/filter.pdf', FIG_DIR);
+    saveas (figure(1), file);
+    system(sprintf('pdfcrop %s %s', file, file));
 end

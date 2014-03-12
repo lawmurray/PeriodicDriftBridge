@@ -1,5 +1,5 @@
 function plot_weight
-  Y_RES = 400;
+  Y_RES = 500;
 
   ax = [0 30 -3 3];
   lambda = 1/4; % tempering
@@ -10,6 +10,7 @@ function plot_weight
   ylabel('x/\pi');
   
   axis(ax);
+  axis('normal');
   cax = caxis();
   
   t = linspace(0, ax(2), 401);
@@ -33,6 +34,7 @@ function plot_weight
   imagesc(t, x./pi, pp1);
   set(gca(), 'ydir', 'normal');
   axis(ax);
+  axis('normal');
   caxis(cax);
   xlabel('t');
 
@@ -40,6 +42,7 @@ function plot_weight
   imagesc(t, x./pi, pp2);
   set(gca(), 'ydir', 'normal');
   axis(ax);
+  axis('normal');
   caxis(cax);
   xlabel('t');
 end
