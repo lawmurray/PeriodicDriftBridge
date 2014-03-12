@@ -19,6 +19,7 @@ function plot_filter
               %t
           end
       end
+      ncclose(nc);
       
       bi_plot_paths('data/obs_set.nc', 'v');
       hold off;
