@@ -17,13 +17,17 @@ function plot_metric(metric)
             T = nc{'time'}(:,:)';
         
             if metric == 1
-                tmp = ess(L)'./mean(T)';
+                % read 'true' likelihood
+                truth_file = sprintf('results/test_exact-%d.nc', rep);
+                truth_nc = netcdf(truth_file, 'r');
+                ll = truth_nc{'loglikelihood'}(:);
+                ncclose(truth_nc);
+                
+                tmp = -mean((L - ll).^2)'./mean(T)';
             elseif metric == 2
-                tmp = car(L)'./mean(T)';
+                tmp = ess(L)'./mean(T)';
             elseif metric == 3
-                tmp = mean(L)';
-            elseif metric == 4
-                tmp = -std(L)'./mean(T)';
+                tmp = car(L)'./mean(T)';
             end
             y{i} = [ y{i}; tmp ];
             P{i} = [ P{i}; nc{'P'}(:) ];
