@@ -23,7 +23,7 @@ function plot_metric(metric)
                 ll = truth_nc{'loglikelihood'}(:);
                 ncclose(truth_nc);
                 
-                tmp = -mean((L - ll).^2)'./mean(T)';
+                tmp = 1.0./mean((L - ll).^2)'./mean(T)';
             elseif metric == 2
                 tmp = ess(L)'./mean(T)';
             elseif metric == 3
