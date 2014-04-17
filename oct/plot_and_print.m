@@ -13,7 +13,7 @@ function plot_and_print ()
     FIG_DIR = 'figs';
     mkdir(FIG_DIR);
     
-    sz = [ 16 4 ];
+    sz = [ 12 9 ];
     set (figure(1), 'papersize', sz);
     set (figure(1), 'paperposition', [0 0 sz]);
 
@@ -33,6 +33,10 @@ function plot_and_print ()
     file = sprintf('%s/metrics.pdf', FIG_DIR);
     saveas(figure(1), file);
     system(sprintf('pdfcrop %s %s', file, file));
+
+    sz = [ 12 4 ];
+    set (figure(1), 'papersize', sz);
+    set (figure(1), 'paperposition', [0 0 sz]);
 
     clf;
     plot_weight;
