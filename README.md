@@ -24,7 +24,7 @@ data sets. Alternatively, these tests may be run as an array job on a cluster:
     qsub -t 0-15 qsub_test_bootstrap.sh
     qsub -t 0-15 qsub_test_exact.sh
 
-The last line computes normalising constants to be used as ``exact'' values
+The last line computes normalising constants to be used as "exact" values
 when computing the MSE metric for comparison plots.
 
 Finally, results may be plot with:
