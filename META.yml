@@ -2,8 +2,7 @@ name: PeriodicDriftBridge
 version: 1.0.0
 author: Lawrence Murray
 email: lawrence.murray@csiro.au
-website-url:
-download-url:
-github-url: 
-description:
-
+website-url: http://www.github.com/lawmurray/PeriodicDriftBridge
+download-url: http://www.github.com/lawmurray/PeriodicDriftBridge/archive/master.tar.gz
+github-url: http://www.github.com/lawmurray/PeriodicDriftBridge
+description: Periodic drift process for diffusion bridge sampling.
