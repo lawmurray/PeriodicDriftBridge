@@ -62,7 +62,7 @@ diffusion processes. *Journal of the Royal Statistical Society Series B*,
 2006, 68, 333-382.
 
 Del Moral, P. & Murray, L. M. Sequential Monte Carlo with Highly Informative
-Observations, 2014.
+Observations, 2014. [\[arXiv\]](http://arxiv.org/abs/1405.4081)
 
 Lin, M.; Chen, R. & Mykland, P. On Generating Monte Carlo Samples of
 Continuous Diffusion Bridges. *Journal of the American Statistical
